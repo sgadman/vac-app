@@ -10,8 +10,8 @@ export default {
 };
 
 const Template = (args) => {
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedState, setSelectedState] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedState, setSelectedState] = useState("");
 
   return (
     <CountryAndStatePicker

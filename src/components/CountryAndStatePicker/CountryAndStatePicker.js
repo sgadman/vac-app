@@ -17,7 +17,7 @@ const CountryAndStatePicker = ({
 
   const handleCountrySelect = (e) => {
     setSelectedCountry(e.target.value);
-    setSelectedState("none");
+    setSelectedState("");
   };
 
   const handleStateSelect = (e) => {

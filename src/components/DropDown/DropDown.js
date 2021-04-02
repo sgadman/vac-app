@@ -13,7 +13,7 @@ const DropDown = ({
       {label && <label>{label}:</label>}
       <select value={selectedValue} onChange={onChange}>
         {defaultOption && (
-          <option value="none" selected disabled hidden>
+          <option value="" disabled hidden>
             {defaultOption}
           </option>
         )}
@@ -30,7 +30,7 @@ const DropDown = ({
 DropDown.defaultProps = {
   defaultOption: null,
   label: null,
-  selectedValue: null,
+  selectedValue: "",
 };
 
 DropDown.propTypes = {

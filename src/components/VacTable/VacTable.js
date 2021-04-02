@@ -19,7 +19,7 @@ const VacTable = ({ handleEditClicked, vacData }) => {
       </thead>
       <tbody>
         {vacData.map((data) => (
-          <tr>
+          <tr key={`data-${data.city}`}>
             <td>{data.city}</td>
             <td>{data.population}</td>
             <td>{data.vaccinated}</td>
