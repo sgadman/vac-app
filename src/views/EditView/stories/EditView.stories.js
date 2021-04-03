@@ -1,18 +1,17 @@
 import React from "react";
 
+import EditView from "../EditView";
 import randomCityData from "../../../mockData/randomCityData";
 
-import EditForm from "../EditForm";
-
 export default {
-  title: "components/EditForm",
-  component: EditForm,
+  title: "views/EditView",
+  component: EditView,
 };
 
-const Template = (args) => <EditForm {...args} />;
+const Template = (args) => <EditView {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   formData: randomCityData()[0],
-  formSubmitted: (data) => console.log(data),
+  handleOnSubmit: (data) => console.log(data),
 };

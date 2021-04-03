@@ -1,5 +1,4 @@
-const randomIntFromInterval = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
+import { randomIntFromInterval } from "../utils/utilities";
 
 const randomCityData = () => {
   const numberOfCities = randomIntFromInterval(10, 100);

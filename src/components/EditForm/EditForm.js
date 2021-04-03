@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const EditForm = ({ formData }) => {
+const EditForm = ({ formData, formSubmitted }) => {
   const [editData, setEditData] = useState(formData);
 
   const onFormChange = (key) => (e) => {
     const updatedEditData = { ...editData };
     updatedEditData[key] = e.target.value;
     setEditData(updatedEditData);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    formSubmitted(editData);
   };
 
   return (
@@ -18,6 +23,7 @@ const EditForm = ({ formData }) => {
         justifyContent: "center",
         alignItems: "center",
       }}
+      onSubmit={handleSubmit}
     >
       <label>{formData.city}</label>
       <label>
@@ -37,7 +43,7 @@ const EditForm = ({ formData }) => {
       <label>
         Doses: <input value={editData.doses} onChange={onFormChange("doses")} />
       </label>
-      <button>Save</button>
+      <input type="submit" value="Save" />
     </form>
   );
 };
@@ -49,6 +55,7 @@ EditForm.propTypes = {
     vaccinated: PropTypes.number,
     doses: PropTypes.number,
   }).isRequired,
+  formSubmitted: PropTypes.func,
 };
 
 export default EditForm;
