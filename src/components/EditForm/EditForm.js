@@ -1,7 +1,33 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import {
+  Input,
+  makeStyles,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  editForm: {
+    display: "inline-block",
+    padding: "20px",
+  },
+  header: {
+    textAlign: "center",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}));
+
 const EditForm = ({ formData, formSubmitted }) => {
+  const classes = useStyles();
+
   const [editData, setEditData] = useState(formData);
 
   const onFormChange = (key) => (e) => {
@@ -15,36 +41,43 @@ const EditForm = ({ formData, formSubmitted }) => {
     formSubmitted(editData);
   };
 
+  const validateField = (field) => isNaN(field);
+
   return (
-    <form
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      onSubmit={handleSubmit}
-    >
-      <label>{formData.city}</label>
-      <label>
-        Total Population:{" "}
-        <input
+    <Paper className={classes.editForm}>
+      <Typography variant="h5" className={classes.header}>
+        {formData.city}
+      </Typography>
+      <form onSubmit={handleSubmit} className={classes.form}>
+        <TextField
+          label="Population"
           value={editData.population}
+          error={validateField(editData.population)}
           onChange={onFormChange("population")}
         />
-      </label>
-      <label>
-        Vaccinated:{" "}
-        <input
+        <TextField
+          label="Vaccinated"
           value={editData.vaccinated}
+          error={validateField(editData.vaccinated)}
           onChange={onFormChange("vaccinated")}
         />
-      </label>
-      <label>
-        Doses: <input value={editData.doses} onChange={onFormChange("doses")} />
-      </label>
-      <input type="submit" value="Save" />
-    </form>
+        <TextField
+          label="Doses"
+          value={editData.doses}
+          error={validateField(editData.doses)}
+          onChange={onFormChange("doses")}
+        />
+        <Input
+          type="submit"
+          value="Save"
+          disabled={
+            validateField(editData.population) ||
+            validateField(editData.vaccinated) ||
+            validateField(editData.doses)
+          }
+        />
+      </form>
+    </Paper>
   );
 };
 

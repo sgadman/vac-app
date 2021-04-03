@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import DataView from "../../views/DataView";
+
+import { useNavigate } from "@reach/router";
+
 import getCountries from "../../apis/getCountries";
 import getVacData from "../../apis/getVacData";
-import { useNavigate } from "@reach/router";
+
+import DataView from "../../views/DataView";
 
 const DataPage = () => {
   const navigate = useNavigate();
@@ -14,7 +17,9 @@ const DataPage = () => {
   }, []);
 
   const handleEditClicked = (data) => {
-    navigate("/edit", { state: data });
+    navigate("/edit", { state: data }).then(() =>
+      console.log("move to edit page")
+    );
   };
 
   return (

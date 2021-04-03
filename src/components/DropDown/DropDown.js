@@ -1,34 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const DropDown = ({
-  defaultOption,
-  label,
-  onChange,
-  options,
-  selectedValue,
-}) => {
+import {
+  FormControl,
+  InputLabel,
+  makeStyles,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  dropDown: {
+    width: 200,
+  },
+}));
+
+const DropDown = ({ label, onChange, options, selectedValue }) => {
+  const classes = useStyles();
+
   return (
-    <>
-      {label && <label>{label}:</label>}
-      <select value={selectedValue} onChange={onChange}>
-        {defaultOption && (
-          <option value="" disabled hidden>
-            {defaultOption}
-          </option>
-        )}
+    <FormControl className={classes.dropDown}>
+      <InputLabel>{label}</InputLabel>
+      <Select value={selectedValue} onChange={onChange}>
         {options.map((value, index) => (
-          <option key={`value-${index}`} value={value}>
+          <MenuItem key={`value-${index}`} value={value}>
             {value}
-          </option>
+          </MenuItem>
         ))}
-      </select>
-    </>
+      </Select>
+    </FormControl>
   );
 };
 
 DropDown.defaultProps = {
-  defaultOption: null,
   label: null,
   selectedValue: "",
 };
@@ -36,7 +40,6 @@ DropDown.defaultProps = {
 DropDown.propTypes = {
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
-  defaultOption: PropTypes.string,
   label: PropTypes.string,
   selectedValue: PropTypes.string,
 };

@@ -1,7 +1,10 @@
 import React from "react";
-import EditView from "../../views/EditView";
+
 import { useLocation, useNavigate } from "@reach/router";
+
 import saveVacChanges from "../../apis/saveVacChanges";
+
+import EditView from "../../views/EditView";
 
 const EditPage = () => {
   const location = useLocation();

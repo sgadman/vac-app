@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+import { makeStyles } from "@material-ui/core";
+
 import CountryAndStatePicker from "../../components/CountryAndStatePicker";
 import VacTableChart from "../../components/VacTableChart";
 
+const useStyles = makeStyles(() => ({
+  dataView: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
+
 const DataView = ({ countryStateData, getVacData, handleEditClicked }) => {
+  const classes = useStyles();
+
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [vacData, setVacData] = useState(null);
@@ -21,7 +33,7 @@ const DataView = ({ countryStateData, getVacData, handleEditClicked }) => {
   }, [getVacData, selectedState]);
 
   return (
-    <div>
+    <div className={classes.dataView}>
       <CountryAndStatePicker
         setSelectedCountry={setSelectedCountry}
         countryStateData={countryStateData}

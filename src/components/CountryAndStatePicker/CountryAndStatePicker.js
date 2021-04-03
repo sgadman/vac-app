@@ -2,6 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import DropDown from "../DropDown";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  countryAndStatePicker: {
+    paddingBottom: "10px",
+    display: "flex",
+    flexDirection: "row",
+  },
+}));
 
 const CountryAndStatePicker = ({
   countryStateData,
@@ -10,6 +19,8 @@ const CountryAndStatePicker = ({
   setSelectedCountry,
   setSelectedState,
 }) => {
+  const classes = useStyles();
+
   const countryData = countryStateData.map((data) => data.country);
   const stateData = countryStateData.find(
     (data) => data.country === selectedCountry
@@ -25,7 +36,7 @@ const CountryAndStatePicker = ({
   };
 
   return (
-    <>
+    <div className={classes.countryAndStatePicker}>
       <DropDown
         defaultOption="Select A Country"
         label="Country"
@@ -42,7 +53,7 @@ const CountryAndStatePicker = ({
           selectedValue={selectedState}
         />
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,9 +1,31 @@
 import React, { useState } from "react";
-import VacTable from "../VacTable";
-import VacChart from "../VacChart";
 import PropTypes from "prop-types";
 
+import {
+  FormControlLabel,
+  makeStyles,
+  Radio,
+  RadioGroup,
+} from "@material-ui/core";
+
+import VacChart from "../VacChart";
+import VacTable from "../VacTable";
+
+const useStyles = makeStyles(() => ({
+  vacTableChart: {
+    width: "100%",
+  },
+  radioGroup: {
+    flexDirection: "row",
+  },
+  tableChartContainer: {
+    height: "calc(100vh - 142px",
+  },
+}));
+
 const VacTableChart = ({ handleEditClicked, vacData }) => {
+  const classes = useStyles();
+
   const tableView = "tableView";
   const graphView = "graphView";
 
@@ -16,34 +38,24 @@ const VacTableChart = ({ handleEditClicked, vacData }) => {
     setSelectedOption(e.target.value);
   };
 
-  return vacData ? (
-    <div>
-      <label>
-        <input
-          type="radio"
-          name="viewMode"
-          value={tableView}
-          checked={isTableView}
-          onChange={onValueChange}
-        />
-        Table
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="viewMode"
-          value={graphView}
-          checked={isGraphView}
-          onChange={onValueChange}
-        />
-        Graph
-      </label>
-      {isTableView && (
-        <VacTable vacData={vacData} handleEditClicked={handleEditClicked} />
-      )}
-      {isGraphView && <VacChart vacData={vacData} />}
+  return (
+    <div className={classes.vacTableChart}>
+      <RadioGroup
+        className={classes.radioGroup}
+        value={selectedOption}
+        onChange={onValueChange}
+      >
+        <FormControlLabel control={<Radio />} label="Table" value={tableView} />
+        <FormControlLabel control={<Radio />} label="Chart" value={graphView} />
+      </RadioGroup>
+      <div className={classes.tableChartContainer}>
+        {isTableView && (
+          <VacTable vacData={vacData} handleEditClicked={handleEditClicked} />
+        )}
+        {isGraphView && <VacChart vacData={vacData} />}
+      </div>
     </div>
-  ) : null;
+  );
 };
 
 VacTable.propTypes = {

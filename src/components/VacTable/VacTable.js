@@ -1,38 +1,59 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableCell,
+  TableBody,
+  TableRow,
+  Button,
+  makeStyles,
+} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  vacTable: {
+    height: "100%",
+  },
+}));
+
 const VacTable = ({ handleEditClicked, vacData }) => {
+  const classes = useStyles();
+
   const onEditClicked = (data) => () => {
     handleEditClicked(data);
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>City</th>
-          <th>Total Population</th>
-          <th>Vaccinated</th>
-          <th>Doses</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        {vacData.map((data) => (
-          <tr key={`data-${data.city}`}>
-            <td>{data.city}</td>
-            <td>{data.population}</td>
-            <td>{data.vaccinated}</td>
-            <td>{data.doses}</td>
-            <td>
-              <button type="button" onClick={onEditClicked(data)}>
-                Edit
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <TableContainer className={classes.vacTable}>
+      <Table stickyHeader>
+        <TableHead>
+          <TableRow>
+            <TableCell>City</TableCell>
+            <TableCell>Total Population</TableCell>
+            <TableCell>Vaccinated</TableCell>
+            <TableCell>Doses</TableCell>
+            <TableCell />
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {vacData.map((data) => (
+            <TableRow key={`data-${data.city}`}>
+              <TableCell>{data.city}</TableCell>
+              <TableCell>{data.population}</TableCell>
+              <TableCell>{data.vaccinated}</TableCell>
+              <TableCell>{data.doses}</TableCell>
+              <TableCell>
+                <Button type="button" onClick={onEditClicked(data)}>
+                  Edit
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

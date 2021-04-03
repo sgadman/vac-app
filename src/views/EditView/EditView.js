@@ -1,10 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { makeStyles } from "@material-ui/core";
+
 import EditForm from "../../components/EditForm";
 
+const useStyles = makeStyles(() => ({
+  editView: {
+    display: "flex",
+    justifyContent: "center",
+  },
+}));
+
 const EditView = ({ formData, handleOnSubmit }) => {
-  return <EditForm formData={formData} formSubmitted={handleOnSubmit} />;
+  const classes = useStyles();
+
+  return (
+    <div className={classes.editView}>
+      <EditForm formData={formData} formSubmitted={handleOnSubmit} />
+    </div>
+  );
 };
 
 EditView.propTypes = {
