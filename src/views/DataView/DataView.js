@@ -14,11 +14,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const DataView = ({ countryStateData, getVacData, handleEditClicked }) => {
+const DataView = ({
+  countryStateData,
+  getVacData,
+  handleEditClicked,
+  prevCountry,
+  prevState,
+}) => {
   const classes = useStyles();
 
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedState, setSelectedState] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(prevCountry || "");
+  const [selectedState, setSelectedState] = useState(prevState || "");
   const [vacData, setVacData] = useState(null);
 
   useEffect(() => {
@@ -32,23 +38,31 @@ const DataView = ({ countryStateData, getVacData, handleEditClicked }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getVacData, selectedState]);
 
+  const onEditClicked = (data) => {
+    handleEditClicked({ ...data, selectedCountry, selectedState });
+  };
+
   return (
     <div className={classes.dataView}>
-      <CountryAndStatePicker
-        setSelectedCountry={setSelectedCountry}
-        countryStateData={countryStateData}
-        selectedState={selectedState}
-        setSelectedState={setSelectedState}
-        selectedCountry={selectedCountry}
-      />
-      {vacData && (
-        <VacTableChart
-          handleEditClicked={handleEditClicked}
-          vacData={vacData}
+      {countryStateData.length !== 0 && (
+        <CountryAndStatePicker
+          setSelectedCountry={setSelectedCountry}
+          countryStateData={countryStateData}
+          selectedState={selectedState}
+          setSelectedState={setSelectedState}
+          selectedCountry={selectedCountry}
         />
+      )}
+      {vacData && (
+        <VacTableChart handleEditClicked={onEditClicked} vacData={vacData} />
       )}
     </div>
   );
+};
+
+DataView.defaultProps = {
+  prevCountry: "",
+  prevState: "",
 };
 
 DataView.propTypes = {
@@ -60,6 +74,8 @@ DataView.propTypes = {
   ).isRequired,
   getVacData: PropTypes.func.isRequired,
   handleEditClicked: PropTypes.func.isRequired,
+  prevCountry: PropTypes.string,
+  prevState: PropTypes.string,
 };
 
 export default DataView;

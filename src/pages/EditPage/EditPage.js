@@ -11,7 +11,7 @@ const EditPage = () => {
   const navigate = useNavigate();
 
   const handleOnSubmit = (data) => {
-    saveVacChanges(data).then(() => navigate("../"));
+    saveVacChanges(data).then(() => navigate("../", { state: data }));
   };
 
   return <EditView formData={location.state} handleOnSubmit={handleOnSubmit} />;

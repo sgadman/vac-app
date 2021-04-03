@@ -9,7 +9,8 @@ const getVacData = async (country, state) => {
 
   return fetch(url)
     .then((res) => res.json())
-    .then((data) => data);
+    .then((data) => data)
+    .catch((error) => console.error(error));
 };
 
 export default getVacData;
