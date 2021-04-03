@@ -15,6 +15,9 @@ const Template = (args) => <DataView {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   countryStateData: countryStateData.countries,
-  getVacData: randomCityData,
+  getVacData: () =>
+    new Promise((resolve) => {
+      resolve(randomCityData());
+    }),
   handleEditClicked: (data) => console.log(data),
 };
