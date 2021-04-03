@@ -11,7 +11,9 @@ const DataView = ({ countryStateData, getVacData, handleEditClicked }) => {
 
   useEffect(() => {
     if (selectedState !== "") {
-      setVacData(getVacData(selectedCountry, selectedState));
+      getVacData(selectedCountry, selectedState).then((data) =>
+        setVacData(data)
+      );
     } else {
       setVacData(null);
     }

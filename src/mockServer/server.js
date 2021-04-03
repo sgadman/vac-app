@@ -11,7 +11,9 @@ const makeServer = ({ environment = "test" }) =>
 
       this.get("/countries", () => countryAndStateData.countries);
 
-      this.get("/data", () => randomCityData());
+      this.get("/vacData", () => randomCityData());
+
+      this.put("/saveVacChanges", (data) => console.log(data));
     },
   });
 

@@ -1,8 +1,11 @@
 import { Router } from "@reach/router";
 
-function App() {
-  const Data = () => <div>data</div>;
-  const Edit = () => <div>Edit</div>;
+import DataPage from "./pages/DataPage";
+import EditPage from "./pages/EditPage";
+
+const App = () => {
+  const Data = () => <DataPage />;
+  const Edit = () => <EditPage />;
 
   return (
     <Router>
@@ -10,6 +13,6 @@ function App() {
       <Edit path="/edit" />
     </Router>
   );
-}
+};
 
 export default App;

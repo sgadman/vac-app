@@ -49,13 +49,13 @@ const EditForm = ({ formData, formSubmitted }) => {
 };
 
 EditForm.propTypes = {
-  formData: PropTypes.exact({
+  formData: PropTypes.shape({
     city: PropTypes.string,
     population: PropTypes.number,
     vaccinated: PropTypes.number,
     doses: PropTypes.number,
   }).isRequired,
-  formSubmitted: PropTypes.func,
+  formSubmitted: PropTypes.func.isRequired,
 };
 
 export default EditForm;
