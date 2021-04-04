@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: "row",
   },
   tableChartContainer: {
-    height: "calc(100vh - 142px",
+    height: "calc(100vh - 142px)",
   },
 }));
 
