@@ -23,10 +23,13 @@ const DataPage = () => {
     );
   };
 
+  const prevCountry = location.state && location.state.selectedCountry;
+  const prevState = location.state && location.state.selectedState;
+
   return (
     <DataView
-      prevCountry={location.state.selectedCountry}
-      prevState={location.state.selectedState}
+      prevCountry={prevCountry}
+      prevState={prevState}
       getVacData={getVacData}
       countryStateData={countryStateData}
       handleEditClicked={handleEditClicked}
